@@ -1,0 +1,185 @@
+<div class="container my-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div
+            class="dt-buttons btn-group flex-wrap"
+            *ngIf="usersService.hasRole(['SuperAdmin', 'Attendance.Create'])"
+          >
+            <label
+              class="btn btn-soft-dark buttons-copy buttons-html5"
+              tabindex="0"
+              aria-controls="datatable-buttons"
+            >
+              <span>Excel</span>
+              <input
+                type="file"
+                (change)="onFileChange($event)"
+                style="display: none"
+              />
+            </label>
+
+            <button
+              class="btn btn-soft-dark buttons-print"
+              tabindex="0"
+              aria-controls="datatable-buttons"
+              type="button"
+              (click)="add()"
+            >
+              <span>Add</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div id="datatable-buttons_filter" class="dataTables_filter">
+            <input
+              type="search"
+              class="form-control form-control-sm w-75 float-end"
+              placeholder="Search by Employee name or Department name"
+              aria-controls="datatable-buttons"
+              [(ngModel)]="searchText"
+            />
+          </div>
+        </div>
+
+        <div class="row my-4">
+          <div class="row col-8">
+            <form class="row" [formGroup]="myForm">
+              <div class="mb-3 col-4">
+                <label for="example-date" class="form-label">From</label>
+                <input
+                  class="form-control w-75"
+                  id="example-date"
+                  type="date"
+                  formControlName="startDate"
+                />
+                <div
+                  *ngIf="
+                    myForm.get('startDate')?.hasError('invalidStartDate') &&
+                    myForm.get('startDate')?.dirty
+                  "
+                >
+                  Start date cannot be today or after.
+                </div>
+              </div>
+              <div class="mb-3 col-4">
+                <label for="example-date" class="form-label">To</label>
+                <input
+                  class="form-control w-75"
+                  id="example-date"
+                  type="date"
+                  formControlName="endDate"
+                />
+                <div *ngIf="myForm.errors?.['dateRangeError']">
+                  Start date must be before end date.
+                </div>
+                <div
+                  *ngIf="
+                    myForm.get('endDate')?.hasError('invalidEndDate') &&
+                    myForm.get('endDate')?.dirty
+                  "
+                >
+                  End date cannot be after today.
+                </div>
+              </div>
+              <div class="mb-3 col-2">
+                <button
+                  [disabled]="myForm.invalid"
+                  type="submit"
+                  class="btn btn-soft-dark mt-3 w-100"
+                  (click)="search()"
+                >
+                  Show
+                </button>
+              </div>
+              <div class="mb-3 col-2">
+                <button
+                  type="submit"
+                  class="btn btn-soft-dark mt-3 w-100"
+                  (click)="reset()"
+                >
+                  reset
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4 mt-1">
+            <a
+              class="action-icon mt-2 d-inline-block ms-2 float-end print"
+              (click)="SavePDF()"
+            >
+              <i class="font-36 ri-file-ppt-fill"></i
+            ></a>
+          </div>
+        </div>
+        <table
+          class="table table-striped table-centered mb-0"
+          id="content"
+          #content
+        >
+          <thead>
+            <tr>
+              <th>Department</th>
+              <th>Employee</th>
+              <th>Attendance</th>
+              <th>Departure</th>
+              <th>Date</th>
+              <th
+                *ngIf="
+                  usersService.hasRole([
+                    'SuperAdmin',
+                    'Attendance.Delete',
+                    'Attendance.Update'
+                  ])
+                "
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of attendancereport.data">
+              <td>{{ data.departmentName }}</td>
+              <td>{{ data.employeeName }}</td>
+              <td>{{ data.arrivalTime }}</td>
+              <td>{{ data.departureTime }}</td>
+              <td>{{ data.attendanceDate }}</td>
+              <td
+                class="table-action"
+                *ngIf="
+                  usersService.hasRole([
+                    'SuperAdmin',
+                    'Attendance.Delete',
+                    'Attendance.Update'
+                  ])
+                "
+              >
+                <a
+                  *ngIf="
+                    usersService.hasRole(['SuperAdmin', 'Attendance.Update'])
+                  "
+                  (click)="edit(data)"
+                  class="btn btn-sm btn-outline-primary mx-1"
+                >
+                  <i class="bi bi-pencil"></i
+                ></a>
+                <a
+                  *ngIf="
+                    usersService.hasRole(['SuperAdmin', 'Attendance.Delete'])
+                  "
+                  (click)="delete(data.id)"
+                  class="btn btn-sm btn-outline-danger mx-1"
+                  data-bs-toggle="modal"
+                  data-bs-target="#centermodal"
+                >
+                  <i class="bi bi-trash"></i
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

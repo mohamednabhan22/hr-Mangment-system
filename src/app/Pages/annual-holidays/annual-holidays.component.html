@@ -1,0 +1,99 @@
+<div class="container mt-5">
+  <div class="card">
+    <h2 class="card-header text-center py-3">Annual Holidays</h2>
+    <div class="card-body">
+      <form [formGroup]="formHoliday" *ngIf="usersService.hasRole(['SuperAdmin','Settings.Create','Settings.Update'])">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Enter name"
+                formControlName="holidayName"
+                [(ngModel)]="Holiday.holidayName"
+              />
+              <ng-container *ngIf="isholidayNameValid.touched">
+                <div
+                  *ngIf="isholidayNameValid?.hasError('required')"
+                  class="form-text text-danger"
+                >
+                  Name is Required
+                </div>
+                <div
+                  *ngIf="isholidayNameValid.hasError('minlength')"
+                  class="form-text text-danger"
+                >
+                  Name length must be more than 5
+                </div>
+                <div
+                  *ngIf="isholidayNameValid.hasError('maxLength')"
+                  class="form-text text-danger"
+                >
+                  Name length must be less than 50
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="date">Date:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                placeholder="Enter date"
+                formControlName="holidayDate"
+                [(ngModel)]="Holiday.holidayDate"
+              />
+              <ng-container *ngIf="isholidayNameValid.touched">
+                <div
+                  *ngIf="isholidayDateValid?.hasError('required')"
+                  class="form-text text-danger"
+                >
+                  Date is Required
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="text-center py-3">
+          <button id="save" class="btn btn-primary" (click)="save()">
+            Save
+          </button>
+        </div>
+      </form>
+      <div class="table-container" style="max-height: 200px; overflow-y: auto" *ngIf="usersService.hasRole(['SuperAdmin','Settings.Read'])">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th *ngIf="usersService.hasRole(['SuperAdmin','Settings.Delete','Settings.Update'])">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of Holidays">
+              <td>{{ h.holidayName }}</td>
+              <td>{{ h.holidayDate }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary mx-1" *ngIf="usersService.hasRole(['SuperAdmin','Settings.Update'])" >
+                  <span class="bi bi-pencil" (click)="setUpdate(h)"></span>
+                </button>
+                <button
+                  *ngIf="usersService.hasRole(['SuperAdmin','Settings.Delete'])"
+                  class="btn btn-sm btn-outline-danger mx-1"
+                  (click)="deleteHoliday(h.id)"
+                >
+                  <span class="bi bi-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

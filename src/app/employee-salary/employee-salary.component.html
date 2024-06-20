@@ -1,0 +1,67 @@
+<div class="content-page mt-5">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="card">
+          <div class="card-body">
+            <div class="search-bar mb-3">
+              <div class="input-group input-group-sm mb-3 w-50">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search by employee name"
+                  #employeeNameInput
+                />
+                <input type="month" class="form-control" #dateInput />
+                <button class="btn btn-primary" (click)="showFormattedDate()">
+                  Show
+                </button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="content" #content>
+                  <thead>
+                    <tr>
+                      <th>Employee Name</th>
+                      <th>Department</th>
+                      <th>Main Salary</th>
+                      <th>Days of Attendance</th>
+                      <th>Days of Absence</th>
+                      <th>Bonus by Hours</th>
+                      <th>Deduct by Hours</th>
+                      <th>Total Bonus</th>
+                      <th>Total Deduct</th>
+                      <th>Net Salary</th>
+                      <th>Operation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let employee of employeeSalaries">
+                      <td>{{ employee.employeeName }}</td>
+                      <td>{{ employee.departmentName }}</td>
+                      <td>{{ employee.baseSalary | currency }}</td>
+                      <td>{{ employee.totalAttendanceDays }}</td>
+                      <td>{{ employee.totalAbsentDays }}</td>
+                      <td>{{ employee.totalOvertimeHours }}</td>
+                      <td>{{ employee.penalityHours }}</td>
+                      <td>{{ employee.totalBounus | currency }}</td>
+                      <td>{{ employee.totalPenality | currency }}</td>
+                      <td>{{ employee.totalSalary | currency }}</td>
+                      <td>
+                        <a
+                          (click)="SavePDF()"
+                          class="btn btn-link operation-icon"
+                        >
+                          <i class="text-dark ri-lg ri-file-ppt-fill"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

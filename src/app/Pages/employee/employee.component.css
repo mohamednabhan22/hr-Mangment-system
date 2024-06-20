@@ -1,0 +1,21 @@
+table tbody tr td {
+  min-width: 150px !important;
+}
+.snack {
+  background-color: red;
+  color: white;
+  margin-top: 50px;
+  z-index: 99999999999999;
+}
+::ng-deep .mat-mdc-snack-bar-container.green-snackbar {
+  --mdc-snackbar-container-color: #14a44d;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mdc-snack-bar-action-button-color: #fff;
+}
+::ng-deep .mat-mdc-snack-bar-container.red-snackbar {
+  --mdc-snackbar-container-color: #dc4c64;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mdc-snack-bar-action-button-color: #fff;
+}

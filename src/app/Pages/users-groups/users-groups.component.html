@@ -1,0 +1,195 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <div class="tab-content">
+            <div
+              class="tab-pane active show"
+              id="buttons-table-preview"
+              role="tabpanel"
+            >
+              <div
+                id="datatable-buttons_wrapper"
+                class="dataTables_wrapper dt-bootstrap5 no-footer"
+              >
+                <div class="row py-4">
+                  <div class="col-md-8 offset-md-2">
+                    <input
+                      id="addGroupInput"
+                      type="text"
+                      class="form-control form-control-sm me-2"
+                      placeholder="Add New Group"
+                      aria-controls="datatable-buttons"
+                      formControlName="name"
+                    />
+                    <ng-container *ngIf="getName.dirty">
+                      <div
+                        *ngIf="getName.hasError('required')"
+                        id="emailHelp"
+                        class="form-text text-danger text-capitalize ps-1 lead"
+                      >
+                        Group Name is required.
+                      </div>
+
+                      <div
+                        *ngIf="getName.hasError('minlength')"
+                        id="emailHelp"
+                        class="form-text text-danger text-capitalize ps-1 lead"
+                      >
+                        Group Name must be at least 3 characters.
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table
+                      id="datatable-buttons"
+                      class="table table-striped dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                      aria-describedby="datatable-buttons_info"
+                      style="width: 1137px"
+                    >
+                      <thead>
+                        <tr>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 40.8px"
+                          >
+                            ID
+                          </th>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 265.8px"
+                            aria-label="Name: activate to sort column"
+                          >
+                            Page Name
+                          </th>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 60.8px"
+                            aria-label="Add: activate to sort column "
+                          >
+                            Add
+                          </th>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 60.8px"
+                            aria-label="Delete: activate to sort column ascending"
+                          >
+                            Delete
+                          </th>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 60.8px"
+                            aria-label="Update: activate to sort column ascending"
+                          >
+                            Update
+                          </th>
+                          <th
+                            tabindex="0"
+                            aria-controls="datatable-buttons"
+                            rowspan="1"
+                            colspan="1"
+                            style="width: 60.8px"
+                            aria-label="Show: activate to sort column ascending"
+                          >
+                            Show
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          class="odd"
+                          *ngFor="let page of pages; let i = index"
+                        >
+                          <td>
+                            {{ i + 1 }}
+                          </td>
+                          <td class="sorting_1 dtr-control">
+                            {{ page.name }}
+                          </td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              [id]="'create' + i"
+                              [checked]="page.create"
+                              (change)="setPermissions($event, i, 'create')"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              [id]="'delete' + i"
+                              [checked]="page.delete"
+                              (change)="setPermissions($event, i, 'delete')"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              [id]="'update' + i"
+                              [checked]="page.update"
+                              (change)="setPermissions($event, i, 'update')"
+                            />
+                          </td>
+                          <td>
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              [id]="'read' + i"
+                              [checked]="page.read"
+                              (change)="setPermissions($event, i, 'read')"
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ng-container>
+                      <div
+                        *ngIf="form.controls['permissions'].hasError('invalid')"
+                        id="emailHelp"
+                        class="form-text text-danger text-capitalize"
+                      >
+                        You have not changed any permissions.
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="text-end">
+                <button
+                  class="btn btn-primary buttons-print"
+                  tabindex="0"
+                  aria-controls="datatable-buttons"
+                  type="submit"
+                  fdprocessedid="6sbgg"
+                >
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <form >
+            <div class="form-group mb-3">
+              <label for="bonusRate">Bonus Rate:</label>
+              <input
+                type="number"
+                id="bonusRate"
+                [(ngModel)]="settings.bonusRate"
+                name="bonusRate"
+                required
+                class="form-control"
+                (change)="Change()"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="penaltyRate">Penalty Rate:</label>
+              <input
+                type="number"
+                id="penaltyRate"
+                [(ngModel)]="settings.penaltyRate"
+                name="penaltyRate"
+                required
+                class="form-control"
+                (change)="Change()"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="weeklyHoliday1">Weekly Holiday 1:</label>
+              <select
+                id="weeklyHoliday1"
+                [(ngModel)]="settings.weeklyHoliday1"
+                name="weeklyHoliday1"
+                required
+                class="form-select"
+              >
+                <option *ngFor="let day of daysOfWeek" [value]="day">
+                  {{ day }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="weeklyHoliday2">Weekly Holiday 2:</label>
+              <select
+                id="weeklyHoliday2"
+                [(ngModel)]="settings.weeklyHoliday2"
+                name="weeklyHoliday2"
+                required
+                class="form-select"
+              >
+                <option *ngFor="let day of daysOfWeek" [value]="day">
+                  {{ day }}
+                </option>
+              </select>
+            </div>
+          </form>
+          <div class="buttons mt-4">
+            <button
+              type="button"
+              (click)="createSettings()"
+              class="btn btn-primary"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<!-- Begin page -->
+
+<div class="content-page my-5">
+  <div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 my-2">
+          <div class="card">
+            <div class="card-body">
+              <form
+                [formGroup]="registrationForm"
+                (submit)="registerUser($event)"
+              >
+                <div class="row">
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label for="fullName" class="form-label">Full Name</label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        class="form-control"
+                        placeholder="Enter full name"
+                        formControlName="fullName"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          registrationForm.controls['fullName'].invalid &&
+                          registrationForm.controls['fullName'].touched
+                        "
+                        class="text-danger"
+                      >
+                        Full Name is required
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="userName" class="form-label">User Name</label>
+                      <input
+                        type="text"
+                        id="userName"
+                        class="form-control"
+                        placeholder="Enter user name"
+                        formControlName="userName"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          registrationForm
+                            .get('userName')
+                            ?.hasError('required') &&
+                          registrationForm.get('userName')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        User Name is required
+                      </div>
+                      <div
+                        *ngIf="
+                          registrationForm
+                            .get('userName')
+                            ?.hasError('minlength') &&
+                          registrationForm.get('userName')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        User Name must be at least 4 characters
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="Enter email"
+                        formControlName="email"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          registrationForm.controls['email'].invalid &&
+                          registrationForm.controls['email'].touched
+                        "
+                        class="text-danger"
+                      >
+                        Email is required
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password:</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        formControlName="password"
+                        placeholder="Enter password"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          registrationForm
+                            .get('password')
+                            ?.hasError('required') &&
+                          registrationForm.get('password')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        Password is required
+                      </div>
+                      <div
+                        *ngIf="
+                          registrationForm
+                            .get('password')
+                            ?.hasError('minlength') &&
+                          registrationForm.get('password')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        Password must be at least 8 characters
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="confirmPassword" class="form-label"
+                        >Confirm Password:</label
+                      >
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="confirmPassword"
+                        formControlName="confirmPassword"
+                        placeholder="Confirm password"
+                        required
+                      />
+                      <div
+                        *ngIf="
+                          registrationForm
+                            .get('confirmPassword')
+                            ?.hasError('required') &&
+                          registrationForm.get('confirmPassword')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        Confirm Password is required
+                      </div>
+                      <div
+                        *ngIf="
+                          registrationForm.hasError('passwordMismatch') &&
+                          registrationForm.get('confirmPassword')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        Passwords do not match
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="groupId" class="form-label">Group</label>
+                      <select
+                        formControlName="groupId"
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option value="" disabled>Select Group</option>
+                        <option *ngFor="let group of groups" [value]="group.id">
+                          {{ group.name }}
+                        </option>
+                      </select>
+
+                      <div
+                        *ngIf="
+                          registrationForm.get('groupId')?.invalid &&
+                          registrationForm.get('groupId')?.touched
+                        "
+                        class="text-danger"
+                      >
+                        Group selection is required
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                      Submit
+                    </button>
+                  </div>
+                  <!-- end col-->
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- end col-->
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+  </div>
+  <!-- end page title -->
+
+  <!-- end card-body -->
+</div>

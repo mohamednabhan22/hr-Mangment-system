@@ -1,0 +1,37 @@
+<div class="modal fade" id="centermodal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-hidden="true"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="mt-0 font-24">
+          Are you Sure you want to {{ data.alerttype }} this data?
+        </h5>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light"
+          data-bs-dismiss="modal"
+          [mat-dialog-close]
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="confirm()"
+          [mat-dialog-close]
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

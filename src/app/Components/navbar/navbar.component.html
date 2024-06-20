@@ -1,0 +1,223 @@
+<div class="navbar-custom">
+  <div class="topbar container-fluid">
+    <div class="d-flex align-items-center gap-lg-2 gap-1">
+      <!-- Topbar Brand Logo -->
+      <div class="logo-topbar">
+        <!-- Logo Dark -->
+        <a class="logo-dark" routerLink="/">
+          <span class="logo-lg">
+            <img src="../../../assets/images/logo.png" alt="dark logo" />
+          </span>
+          <span class="logo-sm">
+            <img src="../../../assets/images/logo.png" alt="small logo" />
+          </span>
+        </a>
+      </div>
+
+      <!-- Sidebar Menu Toggle Button -->
+      <button class="button-toggle-menu">
+        <i class="mdi mdi-menu"></i>
+      </button>
+
+      <!-- Horizontal Menu Toggle Button -->
+      <button
+        class="navbar-toggle"
+        data-bs-toggle="collapse"
+        data-bs-target="#topnav-menu-content"
+      >
+        <div class="lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+
+    <ul class="topbar-menu border-0">
+      <li class="dropdown">
+        <a
+          class="nav-link dropdown-toggle nav-user px-2 border-0"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-haspopup="false"
+          aria-expanded="false"
+        >
+          <span class="d-lg-flex flex-column d-none">
+            <h3 class="my-0">
+              {{ username }}
+            </h3>
+          </span>
+        </a>
+        <div
+          class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown"
+        >
+          <!-- item-->
+          <a (click)="logout()" class="dropdown-item">
+            <i class="mdi mdi-logout me-1"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- ========== Topbar End ========== -->
+
+<!-- ========== Horizontal Menu Start ========== -->
+<div class="topnav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse" id="topnav-menu-content">
+        <ul class="navbar-nav">
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="/"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="ri-home-5-fill"></i>Home
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="/users-groups"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="ri-folder-user-fill"></i>Users Groups
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="user-register"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-user"></i>Users
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="department"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-subject"></i>Departments
+            </a>
+          </li>
+
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin', 'Settings.Read'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="annual-holidays"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-coffee"></i>annual holidays
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin', 'Settings.Read'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="general-settings"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-edit"></i>Setting
+            </a>
+          </li>
+
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['Employees.Read', 'SuperAdmin'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="/employee"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="ri-user-add-fill"></i>Employees
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin', 'Attendance.Read'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="attendance-departure"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-ticket"></i>Attendance
+            </a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            *ngIf="usersService.hasRole(['SuperAdmin', 'Salaries.Read'])"
+          >
+            <a
+              class="nav-link"
+              routerLink="employee-salary"
+              id="topnav-dashboards"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i class="uil-dollar-alt"></i>Salaries
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

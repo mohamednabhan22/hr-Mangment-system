@@ -1,0 +1,108 @@
+<div
+  id="login-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog w-100">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form [formGroup]="timeForm" (ngSubmit)="confirm()">
+          <div class="mb-3" *ngIf="Flag">
+            <label for="arrivalTime" class="form-label">Department</label>
+            <input
+              class="form-control"
+              type="text"
+              id="arrivalTime"
+              required=""
+              [disabled]="true"
+              value="{{ data.report.departmentName }}"
+            />
+          </div>
+          <div class="mb-3" *ngIf="!Flag">
+            <label for="arrivalTime" class="form-label">Employee Name</label>
+            <select
+              class="form-control"
+              type="text"
+              required=""
+              [disabled]="Flag"
+              formControlName="employeeid"
+            >
+              <option
+                *ngFor="let employee of employees"
+                value="{{ employee.nationalId }}"
+              >
+                {{ employee.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3" *ngIf="Flag">
+            <label for="arrivalTime" class="form-label">Date</label>
+            <input
+              class="form-control"
+              type="text"
+              id="arrivalTime"
+              required=""
+              [disabled]="true"
+              value="{{ data.report.attendanceDate }}"
+            />
+          </div>
+          <div class="mb-3" *ngIf="Flag">
+            <label for="arrivalTime" class="form-label">Employee Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="arrivalTime"
+              required=""
+              [disabled]="true"
+              value="{{ data.report.employeeName }}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="arrivalTime" class="form-label">arrival Time</label>
+            <input
+              class="form-control"
+              type="time"
+              id="arrivalTime"
+              required=""
+              formControlName="startTime"
+            />
+            <div *ngIf="timeForm.get('startTime')?.errors?.['required']">
+              arrival time is required
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="departureTime" class="form-label">departure Time</label>
+            <input
+              class="form-control"
+              type="time"
+              required=""
+              id="departureTime"
+              formControlName="endTime"
+            />
+
+            <div *ngIf="timeForm.get('endTime')?.errors?.['required']">
+              departure time is required
+            </div>
+            <div *ngIf="timeForm.errors?.['timeOrder']">
+              departure time must be after start time
+            </div>
+          </div>
+
+          <div class="mb-3 text-center">
+            <button
+              class="btn rounded-pill btn-primary"
+              type="submit"
+              [disabled]="timeForm.invalid"
+              [mat-dialog-close]
+            >
+              Confirm
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
